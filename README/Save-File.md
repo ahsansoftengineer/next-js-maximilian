@@ -1,5 +1,6 @@
+## Saving File to Public Folder
+```javascript
 import fs from 'node:fs'
-
 export async function SaveFile(image, folder) {
   const extension = image.name.split('.').pop();
   var date_time = Date.now();
@@ -15,10 +16,4 @@ export async function SaveFile(image, folder) {
   });
   return `/${folder}/${fileName}`;
 }
-
-
-export function Validate(obj, key) {
-  if(!obj[key] || obj[key].trim() === ''){
-    throw new Error(`${key} is required`)
-  }
-}
+```

@@ -60,6 +60,7 @@ async function initData() {
 initData();
 ```
 4. CRUD OPERATIONS
+- CREATE
 ```javascript
 import { get, gets, modify } from "./crud";
 import slugify from 'slugify'
@@ -102,6 +103,9 @@ export async function shareMeal(prevState,formData) {
   }
 
   await saveMeal(meal)
+  // revalidatePath tells NextJS to again Cache the Path
+
+  // revalidatePath('/meals', 'layout' || 'page'); Second Args says wheather to revalidate children as well
   revalidatePath('/meals');
   redirect('/meals')
 }

@@ -2,13 +2,20 @@ import Image from 'next/image';
 import classes from './page.module.css';
 import { getMeal } from '@/lib/meals';
 import { notFound } from 'next/navigation';
+
+export async function generateMetadata({params}: any) {
+  const meal = await getMeal(params.mealSlug)
+  return {
+    title: meal.title,
+    description: meal.summary
+  }
+}
 export default async function MealDetailsPage({ params }: any) {
   const meal = await getMeal(params.mealSlug);
   if(!meal) {
     return notFound();
   }
   const instructions =  meal.instructions.replaceAll('\n', '<br />')
-  console.log(meal)
   return (
     <>
       <header className={classes.header}>

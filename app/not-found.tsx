@@ -1,5 +1,4 @@
 export default function NotFound(info: any) {
-  console.log(info) 
   return (
     <main className="not-found">
       <h1>Not found!</h1>

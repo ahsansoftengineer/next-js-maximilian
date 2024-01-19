@@ -4,6 +4,12 @@ import classes from './page.module.css';
 import { shareMeal } from '@/lib/action';
 import MealsFormSubmit from '@/components/meals/meals-form-submit';
 import { useFormState } from 'react-dom';
+
+// CLIENT COMPONENT DONT USE METADATA LIKE THIS
+// export const metadata = {
+//   title: 'Add Meals',
+//   description: 'Add Meals and share with the world so they know.'
+// }
 export default function ShareMealPage() {
   // NOT FOR CLIENT COMPOENTS
   // async function shareMeal(formData: any) {

@@ -2,6 +2,11 @@ import Image from 'next/image';
 import classes from './page.module.css';
 import { getMeal } from '@/lib/meals';
 import { notFound } from 'next/navigation';
+import path from 'node:path';
+import fs from 'fs/promises';
+
+
+
 
 export async function generateMetadata({params}: any) {
   const meal = await getMeal(params.mealSlug)
@@ -11,11 +16,13 @@ export async function generateMetadata({params}: any) {
   }
 }
 export default async function MealDetailsPage({ params }: any) {
+  // WHEN NOT USING GET STATIC PROPS
   const meal = await getMeal(params.mealSlug);
   if(!meal) {
     return notFound();
   }
   const instructions =  meal.instructions.replaceAll('\n', '<br />')
+
   return (
     <>
       <header className={classes.header}>
@@ -44,3 +51,29 @@ export default async function MealDetailsPage({ params }: any) {
     </>
   );
 }
+
+// MealDetailsPage.getInitialProps = async ({params}: any) => {
+//   const meal = await getMeal(params.mealSlug);
+//   return {
+//     props: {
+//       meal,
+//     },
+//     revalidate: 10 // seconds
+//   }
+// }
+// export async function getStaticProps({params}: any) {
+//   // READING FILE FROM CURRENT WORKING DIRECTORY
+//   // const filePath = path.join(process.cwd(), 'data', 'dummy-backend.json')
+//   // const jsonData = await fs.readFile(filePath)y
+//   // const data = JSON.parse(jsonData);
+
+//   const meal = await getMeal(params.mealSlug);
+//   return {
+//     props: {
+//       meal,
+//     },
+//     revalidate: 10 // seconds
+//   }
+
+// }
+ 

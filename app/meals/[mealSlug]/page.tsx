@@ -5,16 +5,30 @@ import { notFound } from 'next/navigation';
 import path from 'node:path';
 import fs from 'fs/promises';
 
-export async function generateMetadata({meal, params}: any) {
-  // const meal = await getMeal(params.mealSlug)
-  return {
-    title: meal.title,
-    description: meal.summary
-  }
-}
-export default async function MealDetailsPage({ params }: any) {
+
+// export async function generateStaticParams({params}: any) {
+//   const meal = await getMeal(params.mealSlug);
+//   return {
+//     pageProps: {
+//       meal,
+//       params
+//     },
+//     revalidate: 10 // seconds
+//   }
+// }
+// export async function generateMetadata({meal, params}: any) {
+//   // const meal = await getMeal(params.mealSlug) || {}
+//   return {
+//     title: meal.title,
+//     description: meal.summary
+//   }
+// }
+// {meal, params }: any
+export default async function MealDetailsPage(props: any) {
   // WHEN NOT USING GET STATIC PROPS
-  const meal = await getMeal(params.mealSlug);
+  console.log({props})
+  const meal = await getMeal(props.params.mealSlug);
+  console.log({meal})
   if(!meal) {
     return notFound();
   }
@@ -49,37 +63,4 @@ export default async function MealDetailsPage({ params }: any) {
   );
 }
 
-// MealDetailsPage.getInitialProps = async ({params}: any) => {
-//   const meal = await getMeal(params.mealSlug);
-//   console.log({meal})
-//   return {
-//     pageProps: {
-//       meal,
-//       params
-//     },
-//     revalidate: 10 // seconds
-//   }
-// }
-// export async function getInitialProps({params}: any) {
-//   const meal = await getMeal(params.mealSlug);
-//   console.log({meal})
-//   return {
-//     pageProps: {
-//       meal,
-//       params
-//     },
-//     revalidate: 10 // seconds
-//   }
-// }
-// export default  MealDetailsPage
-// export async function getStaticProps({params}: any) {
-//   const meal = await getMeal(params.mealSlug);
-//   return {
-//     props: {
-//       meal,
-//       params
-//     },
-//     revalidate: 10 // seconds
-//   }
-// }
  

@@ -5,11 +5,8 @@ import { notFound } from 'next/navigation';
 import path from 'node:path';
 import fs from 'fs/promises';
 
-
-
-
-export async function generateMetadata({params}: any) {
-  const meal = await getMeal(params.mealSlug)
+export async function generateMetadata({meal, params}: any) {
+  // const meal = await getMeal(params.mealSlug)
   return {
     title: meal.title,
     description: meal.summary
@@ -54,26 +51,35 @@ export default async function MealDetailsPage({ params }: any) {
 
 // MealDetailsPage.getInitialProps = async ({params}: any) => {
 //   const meal = await getMeal(params.mealSlug);
+//   console.log({meal})
 //   return {
-//     props: {
+//     pageProps: {
 //       meal,
+//       params
 //     },
 //     revalidate: 10 // seconds
 //   }
 // }
+// export async function getInitialProps({params}: any) {
+//   const meal = await getMeal(params.mealSlug);
+//   console.log({meal})
+//   return {
+//     pageProps: {
+//       meal,
+//       params
+//     },
+//     revalidate: 10 // seconds
+//   }
+// }
+// export default  MealDetailsPage
 // export async function getStaticProps({params}: any) {
-//   // READING FILE FROM CURRENT WORKING DIRECTORY
-//   // const filePath = path.join(process.cwd(), 'data', 'dummy-backend.json')
-//   // const jsonData = await fs.readFile(filePath)y
-//   // const data = JSON.parse(jsonData);
-
 //   const meal = await getMeal(params.mealSlug);
 //   return {
 //     props: {
 //       meal,
+//       params
 //     },
 //     revalidate: 10 // seconds
 //   }
-
 // }
  
